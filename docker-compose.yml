@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    command: sh -c "zip -g function.zip /lambda_function.py && cp /function.zip /dist/function.zip" 
+    volumes:
+      - ./dist:/dist
+      - ./lambda_function.py:/lambda_function.py
+      - ./requirements.txt:/requirements.txt
