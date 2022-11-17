@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     book = xw.Book(json=json.loads(event["body"]))
 
     sheet1 = book.sheets[0]
-    df = sheet1['A1'].expand().options('df', index=False).value
+    df = sheet1["A1"].expand().options("df", index=False).value
     sheet1["G1"].value = df.T
 
     return book.json()
