@@ -12,10 +12,10 @@ def lambda_handler(event, context):
             },
             "body": "Unauthorized",
         }
-    book = xw.Book(json=json.loads(event["body"]))
+    with xw.Book(json=json.loads(event["body"])) as book:
 
-    sheet1 = book.sheets[0]
-    df = sheet1["A1"].expand().options("df", index=False).value
-    sheet1["G1"].value = df.T
+        sheet1 = book.sheets[0]
+        df = sheet1["A1"].expand().options("df", index=False).value
+        sheet1["G1"].value = df.T
 
-    return book.json()
+        return book.json()
